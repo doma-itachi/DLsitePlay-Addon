@@ -1,0 +1,90 @@
+.PlayAddon_SaveButton{
+    width: 140px;
+    height: 40px;
+    /* background-color: #1f9aff; */
+    background: linear-gradient(to left, #1f9aff, #0270c9);
+    border-radius: 6px;
+    display: grid;
+    place-content: center;
+    color: white;
+    font-size: 18px;
+}
+.PlayAddon_SaveButton>div{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-color: white;
+    border-radius: inherit;
+    opacity: 0;
+}
+/* .PlayAddon_SaveButton::after{
+    content: "";
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    background-color: black;
+    border-radius: inherit;
+    opacity: 0;
+} */
+.Addon_ReadState_Wrap{
+    display: flex;
+}
+
+.Addon_ReadState_State{
+    background-color: white;
+    padding: 1px 2px;
+    border: 1px solid #1f9aff;
+    border-radius: 5px;
+    color: #1f9aff;
+}
+.Addon_ReadState_State>div{
+    line-height: 14px;
+    margin: 1px 0;
+    padding: 0 2px;
+}
+
+.Addon_ReadState_State[complete]{
+    border: 1px solid slategray;
+    color: slategray;
+}
+
+.Addon_ReadState_Percent{
+    line-height: 14px;
+    color: #4f4f4f;
+    margin: auto 0;
+    padding: 0 4px;
+}
+
+.Addon_Settings_title{
+    color: #666;
+    font-size: 1.4rem;
+    margin-bottom: 7px;
+    padding: 0 12px;
+}
+
+.Addon_Settings_list{
+    background: #fff;
+}
+
+.Addon_Settings_item:first-child{
+    border-top: 1px solid #d5d5d5;
+}
+.Addon_Settings_item{
+    align-items: center;
+    border-bottom: 1px solid #d5d5d5;
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+    padding: 0 12px;
+}
+.Addon_Settings_pointer{
+    cursor: pointer;
+}
+.Addon_Settings_label{
+    font-size: 1.6rem;
+    text-align: center;
+    width: 100%;
+}
+.Addon_Settings_delete{
+    color: #d40000;
+}
