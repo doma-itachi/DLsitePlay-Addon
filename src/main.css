@@ -17,15 +17,7 @@
     border-radius: inherit;
     opacity: 0;
 }
-/* .PlayAddon_SaveButton::after{
-    content: "";
-    width: inherit;
-    height: inherit;
-    position: absolute;
-    background-color: black;
-    border-radius: inherit;
-    opacity: 0;
-} */
+
 .Addon_ReadState_Wrap{
     display: flex;
 }

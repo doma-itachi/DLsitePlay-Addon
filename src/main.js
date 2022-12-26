@@ -62,10 +62,6 @@ class Storage{
         console.log(await browser.storage.local.get(id));
     }
 
-    static getInfo(id, path){
-
-    }
-
     static async registInfo(id, path, info){
         // let buffer={[id]:{[path]:info}};
         let data=await browser.storage.local.get(id);
@@ -197,7 +193,7 @@ let observer=new MutationObserver(async ()=>{
             logf(state.selectedID+"保存されました");
 
             document.querySelector(".PlayAddon_SaveButton>div").animate(
-                [{opacity: 0.3},{opacity:0}],
+                [{opacity: 0.6},{opacity:0}],
                 {duration:500, easing:"ease-out"}
             );
 
