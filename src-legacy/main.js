@@ -119,8 +119,11 @@ let observer=new MutationObserver(async ()=>{
                 let currentPage=DOMMgr.getCurrentPage();
                 if(DOMMgr.getTotalPage!=undefined &&
                 currentPage!=undefined){
-                    for(let i=currentPage;i<page;i++){
+                    let flipPage=()=>{
                         document.querySelector("[class^='ImageViewer_imageViewer']").click();
+                    }
+                    for(let i=currentPage;i<page;i++){
+                        setTimeout(flipPage);
                     }
                 }
                 else setTimeout(continuePage, 100, page);
@@ -189,7 +192,7 @@ let observer=new MutationObserver(async ()=>{
             </button>
             `
         );
-        document.querySelector(".PlayAddon_SaveButton").addEventListener("touchend", ()=>{
+        document.querySelector(".PlayAddon_SaveButton").addEventListener("click", ()=>{
             logf(state.selectedID+"保存されました");
 
             document.querySelector(".PlayAddon_SaveButton>div").animate(

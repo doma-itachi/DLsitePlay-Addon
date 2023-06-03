@@ -80,3 +80,6 @@
 .Addon_Settings_delete{
     color: #d40000;
 }
+[class^='ImageViewerControls_bottomButtonGroup']>button{
+    margin-left: 20px;
+}
