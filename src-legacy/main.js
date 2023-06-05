@@ -17,6 +17,7 @@ class State{
     getRoute(URL){
         URL=decodeURI(URL);
         let path=[];
+        // /で区切られたURLから#以降を切り取る
         let urlArray=URL.split("/");
         for(let i=0;i<urlArray.length;i++){
             if(urlArray[i]==="#"){
