@@ -1,19 +1,28 @@
 # DLsitePlay Addon
 ## 概要
-PC / Android版Firefox上で動作する、DLsitePlayに新しい機能を追加するアドオンです。
+PC / Android上で動作する、DLsitePlayに新しい機能を追加する拡張機能です。
+
+### 主な機能
+- 読書進捗の保存&復帰
 
 ## インストール
-### PC
-### Android
-1. Beta版またはNightly版Firefoxをインストール(Beta版を推奨)
-2. 以下のユーザーID、リストIDから拡張機能をインストールしてください  
+### PC (Chromium系)
+以下のリンクからインストールしてください
 
-詳しくは[こちら]()
+### Android
+1. [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser&hl=ja&gl=US)を端末にインストールする
+2. Kiwi Browser上で[ここから]()拡張機能をインストールする
+3. オプションでKiwi BrowserからDLsitePlayをインストールしてください
+
+詳しい導入方法は[こちら]()
+### Firefox版(レガシー)
+> レガシーバージョンです！今後はサポートされません。
+>https://addons.mozilla.org/ja/firefox/addon/dlsiteplay_addon/
 
 ## 機能
 ### 実装済み
 - 読書進捗の保存＆ページ復帰
-- データのバックアップ＆復帰
+- データのバックアップ＆復元
 
 ### 実装したい
 - ダークモード
