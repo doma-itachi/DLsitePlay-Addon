@@ -7,11 +7,11 @@ PC / Android上で動作する、DLsitePlayに新しい機能を追加する拡�
 
 ## インストール
 ### PC (Chromium系)
-以下のリンクからインストールしてください
+[ここから](https://chrome.google.com/webstore/detail/dlsiteplay-addon/mhakhgmbhcjmeppkcbfpbajohjhoplgf)拡張機能をインストールしてください
 
 ### Android
 1. [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser&hl=ja&gl=US)を端末にインストールする
-2. Kiwi Browser上で[ここから]()拡張機能をインストールする
+2. Kiwi Browser上で[ここから](https://chrome.google.com/webstore/detail/dlsiteplay-addon/mhakhgmbhcjmeppkcbfpbajohjhoplgf)拡張機能をインストールする
 3. オプションでKiwi BrowserからDLsitePlayをインストールしてください
 
 詳しい導入方法は[こちら]()
