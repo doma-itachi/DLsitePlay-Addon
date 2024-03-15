@@ -86,3 +86,27 @@
 .Addon_Settings_delete{
     color: #d40000;
 }
+
+.Addon_Credit_wrap{
+    display: flex;
+    padding: 0 12px;
+    padding-top: 8px;
+    color: rgb(102, 102, 102);
+    align-items: center;
+}
+.Addon_Credit_content{
+    flex-grow: 1;
+}
+.Addon_Credit_name{
+    font-size: 16px;
+}
+.Addon_Credit_info{
+    font-size: 12px;
+}
+.Addon_Credit_ghicon{
+    width: 30px;
+    height: 30px;
+}
+.Addon_Credit_ghicon path{
+    fill: rgb(102, 102, 102);
+}
