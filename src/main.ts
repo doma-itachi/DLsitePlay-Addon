@@ -105,15 +105,15 @@ class TreePage extends Page{
     }
     
     public async domChanged() {
-        let files: NodeListOf<Element>=document.querySelectorAll("[class^='WorkTreeList_tree']>li");
+        let files: NodeListOf<Element>=document.querySelectorAll("[class^='_tree']>li");
         let datas=await chrome.storage.local.get(this.workID);
         for(let file of files){
             if(file.classList.contains("Addon_modified"))continue;
             file.classList.add("Addon_modified");
-            let DOM_info=file.querySelector("[class^='WorkTreeList_info']");
+            let DOM_info=file.querySelector("[class^='_info']");
             if(DOM_info.textContent.indexOf("-")==-1)continue;//フォルダだったらcontinueする
 
-            let filename=`${this.directory}/${file.querySelector("[class^='WorkTreeList_filename']").textContent}`;
+            let filename=`${this.directory}/${file.querySelector("[class^='_filename']").textContent}`;
 
             let data=undefined;
             if(datas[this.workID])data=datas[this.workID][filename];//進捗が保存されていたら要素を挿入
@@ -155,7 +155,7 @@ class ViewPage extends Page{
             let currentPage=ViewPage.getCurrentPage();
 
             if(ViewPage.getTotalPage()&&currentPage){
-                let goNext=()=>(document.querySelector("[class^='ImageViewer_imageViewer']") as any).click();
+                let goNext=()=>(document.querySelector("[class^='_imageViewer']") as HTMLDivElement).click();
 
                 for(let i=currentPage;i<page;i++)setTimeout(goNext);
             }
@@ -174,7 +174,7 @@ class ViewPage extends Page{
 
     public domChanged(): void {
         if(document.querySelector(".PlayAddon_SaveButton")===null &&
-        document.querySelector("[class^='ImageViewerControls_bottomButtons']")!==null){
+        document.querySelector("[class^='_bottomButtons']")!==null){
             this.insertButton();
         }
     }
@@ -188,7 +188,7 @@ class ViewPage extends Page{
             </button>
         `
 
-        document.querySelector("[class^='ImageViewerControls_bottomButtons']").insertAdjacentHTML("afterbegin", context);
+        document.querySelector("[class^='_bottomButtons']").insertAdjacentHTML("afterbegin", context);
 
         //イベント登録
         document.querySelector(".PlayAddon_SaveButton").addEventListener("click", ()=>this.saveProgress());//thisが要素を指してしまうためアロー関数で呼び出し
@@ -206,13 +206,13 @@ class ViewPage extends Page{
     }
 
     private static getTotalPage(): number{
-        const element=document.querySelector("[class^='ImageViewerPageCounter_totalPage']");
+        const element=document.querySelector("[class^='_totalPage']");
         if(element)return parseInt(element.textContent);
         else return undefined;
     }
 
     private static getCurrentPage(): number{
-        const element=document.querySelector("[class^='ImageViewerPageCounter_currentPage']");
+        const element=document.querySelector("[class^='_currentPage']");
         if(element)return parseInt(element.textContent);
         else return undefined;
     }
@@ -224,7 +224,7 @@ class SettingsPage extends Page{
     }
     
     public domChanged(): void {
-        if(document.querySelector("[class^='Settings_settings']")!==null &&
+        if(document.querySelector("[class^='_settings']")!==null &&
             document.querySelector(".Addon_Settings_settings")===null){
                 this.insertColumn();
         }
@@ -255,7 +255,7 @@ class SettingsPage extends Page{
             </section>
         `;
 
-        document.querySelector("[class^='Settings_settings']:last-child").insertAdjacentHTML("afterend", context);
+        document.querySelector("[class^='_settings']:last-child").insertAdjacentHTML("afterend", context);
         //イベント登録
         document.querySelector(".Addon_Settings_save").addEventListener("click", SettingsPage.saveBackup);
         document.querySelector(".Addon_Settings_load").addEventListener("click", SettingsPage.loadBackup);
