@@ -90,7 +90,7 @@
 .Addon_Credit_wrap{
     display: flex;
     padding: 0 12px;
-    padding-top: 8px;
+    margin-bottom: 7px;
     color: rgb(102, 102, 102);
     align-items: center;
 }
