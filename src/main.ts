@@ -240,7 +240,16 @@ class SettingsPage extends Page{
 
         const context: string=`
             <section class="Addon_Settings_settings">
-                <h2 class="Addon_Settings_title">アドオン</h2>
+                <div class="Addon_Credit_wrap">
+                    <div class="Addon_Credit_content">
+                        <div class="Addon_Credit_name">DLsitePlay Addon ${version}</div>
+                        <div class="Addon_Credit_info">保存データ数 - / 使用バイト数 -bytes</div>
+                    </div>
+                    <a href="https://github.com/doma-itachi/DLsitePlay-Addon" target="_blank" class="Addon_Credit_ghicon">
+                        ${githubIcon}
+                    </a>
+                </div>
+                
                 <ol class="Addon_Settings_list">
                     <li class="Addon_Settings_item Addon_Settings_pointer">
                         <p class="Addon_Settings_label Addon_Settings_save">
@@ -259,15 +268,6 @@ class SettingsPage extends Page{
                     </li>
                 </ol>
 
-                <div class="Addon_Credit_wrap">
-                    <div class="Addon_Credit_content">
-                        <div class="Addon_Credit_name">DLsitePlay Addon ${version}</div>
-                        <div class="Addon_Credit_info">保存データ数 - / 使用バイト数 -bytes</div>
-                    </div>
-                    <a href="https://github.com/doma-itachi/DLsitePlay-Addon" target="_blank" class="Addon_Credit_ghicon">
-                        ${githubIcon}
-                    </a>
-                </div>
             </section>
         `;
 
