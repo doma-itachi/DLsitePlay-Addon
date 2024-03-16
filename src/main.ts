@@ -70,6 +70,7 @@ class State{
                 break;
             case "library":
                 State.currentPageType=PageType.Library;
+                State.page=new LibraryPage(path);
                 break;
             case "settings":
                 State.currentPageType=PageType.Settings;
@@ -91,6 +92,38 @@ class Page{
 
     public domChanged(){
         //DOMに変更があったとき呼び出し
+    }
+}
+
+class LibraryPage extends Page{
+    constructor(path: string[]){
+        super(path);
+    }
+
+    public async domChanged() {
+        // const datas = await chrome.storage.local.get(null);
+        const containers = document.querySelectorAll("[class^='_workList'] [data-test-id='virtuoso-item-list']>div");
+
+        for(const item of containers){
+            if(item.classList.contains("Addon_modified"))continue;
+            // アイテムのIDを取得
+            console.log(item.querySelector("[class^='_thumbnail']>span"));
+            const styleAttr = item.querySelector("[class^='_thumbnail']>span")?.getAttribute("style");
+            console.log(styleAttr)
+            if(!styleAttr){
+                return;
+            }
+            const id = styleAttr.match(/[^n]\/(?<id>RJ.+)_img/).groups.id;
+            if(!id){
+                return;
+            }
+
+            item.querySelector("[class^='_info']")?.insertAdjacentText("beforeend", "挿入済み");
+            item.classList.add("Addon_modified");
+            console.log(`id: ${id}`);
+
+            // 
+        }
     }
 }
 
