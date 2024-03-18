@@ -96,35 +96,99 @@ class Page{
 }
 
 class LibraryPage extends Page{
+    public readData: {[key: string]: ProductInfo};
+
     constructor(path: string[]){
         super(path);
+        this.load();
+    }
+
+    private async load(){
+        this.readData = await chrome.storage.local.get();
+        console.log(this.readData)
     }
 
     public async domChanged() {
-        // const datas = await chrome.storage.local.get(null);
+        setTimeout(()=>this.insertDOM(), 20);
+    }
+    
+    private insertDOM(){
+        if(!this.readData) return;
         const containers = document.querySelectorAll("[class^='_workList'] [data-test-id='virtuoso-item-list']>div");
-
+    
         for(const item of containers){
             if(item.classList.contains("Addon_modified"))continue;
+            
             // アイテムのIDを取得
             console.log(item.querySelector("[class^='_thumbnail']>span"));
-            const styleAttr = item.querySelector("[class^='_thumbnail']>span")?.getAttribute("style");
+            let styleAttr = item.querySelector("[class^='_thumbnail']>span")?.getAttribute("style");
             console.log(styleAttr)
             if(!styleAttr){
-                return;
+                const seriesImg = item.querySelector("[class^='_seriesThumbnail']>img");
+                if(seriesImg){
+                    styleAttr=(seriesImg as HTMLImageElement).src;
+                }
+                else{
+                    continue;
+                }
             }
-            const id = styleAttr.match(/[^n]\/(?<id>RJ.+)_img/).groups.id;
+            const id = styleAttr.match(/[^a-z]\/(?<id>[A-Z]{2}.+)_img/).groups.id;
             if(!id){
-                return;
+                continue;
             }
 
-            item.querySelector("[class^='_info']")?.insertAdjacentText("beforeend", "挿入済み");
-            item.classList.add("Addon_modified");
-            console.log(`id: ${id}`);
+            //IDが取得できたら要素を挿入する
+            const readCssClasses = {
+                reading: "addon_read_reading",
+                finish: "addon_read_finish"
+            }
+            const iconClass = item.querySelector("[class^='_icons']>[class^='_icon']").classList[0];
+            if(id in this.readData){
+                let progress: number;
 
-            // 
+                /*
+                 * ### 読了が1つもない場合
+                 *  > 最も高い進捗を表示
+                 * ### 読了が一つでもある場合
+                 *  > 読了以外の最も高い進捗を表示
+                 *  > 読了しかない場合読了を表示
+                 */
+
+                for(const info of Object.values(this.readData[id])){
+                    const prg = (info.currentPage-1)/(info.totalPage-1);
+                    if(prg==1){
+                        if(!progress){
+                            progress=prg;
+                        }
+                    }
+                    else{
+                        if(!progress || progress<prg || progress==1) progress=prg;
+                    }
+
+                }
+                console.log(progress);
+                
+                const html = `
+                    <span class="${iconClass} ${progress==1?readCssClasses.finish:readCssClasses.reading}">
+                        ${Math.floor(progress*100)}%
+                    </span>
+                `
+
+                item.querySelector("[class^='_icons']")?.insertAdjacentHTML("afterbegin", html);
+                console.log(`id: ${id}`);
+            }
+            item.classList.add("Addon_modified");
         }
     }
+}
+
+interface ProductInfo{
+    [key: string]: ReadInfo;
+}
+
+interface ReadInfo{
+    currentPage: number;
+    totalPage: number;
 }
 
 class TreePage extends Page{
@@ -158,7 +222,7 @@ class TreePage extends Page{
             if(data){
                 console.log(data);
                 let state_text=data.currentPage==data.totalPage?"読了":"読書中";
-                let state_percent=Math.floor(data.currentPage/data.totalPage*100);
+                let state_percent=Math.floor(((data.currentPage-1)/(data.totalPage-1))*100);
 
                 const context=`
                     <div class="Addon_ReadState_Wrap">

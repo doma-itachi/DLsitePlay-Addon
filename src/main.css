@@ -110,3 +110,10 @@
 .Addon_Credit_ghicon path{
     fill: rgb(102, 102, 102);
 }
+
+.addon_read_reading{
+    background-color: #1f9aff;
+}
+.addon_read_finish{
+    background-color: rgb(224, 168, 63);
+}
