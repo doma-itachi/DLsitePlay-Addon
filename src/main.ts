@@ -120,9 +120,8 @@ class LibraryPage extends Page{
             if(item.classList.contains("Addon_modified"))continue;
             
             // アイテムのIDを取得
-            console.log(item.querySelector("[class^='_thumbnail']>span"));
             let styleAttr = item.querySelector("[class^='_thumbnail']>span")?.getAttribute("style");
-            console.log(styleAttr)
+            
             if(!styleAttr){
                 const seriesImg = item.querySelector("[class^='_seriesThumbnail']>img");
                 if(seriesImg){
@@ -144,38 +143,23 @@ class LibraryPage extends Page{
             }
             const iconClass = item.querySelector("[class^='_icons']>[class^='_icon']").classList[0];
             if(id in this.readData){
-                let progress: number;
-
                 /*
-                 * ### 読了が1つもない場合
-                 *  > 最も高い進捗を表示
-                 * ### 読了が一つでもある場合
-                 *  > 読了以外の最も高い進捗を表示
-                 *  > 読了しかない場合読了を表示
-                 */
-
-                for(const info of Object.values(this.readData[id])){
-                    const prg = (info.currentPage-1)/(info.totalPage-1);
-                    if(prg==1){
-                        if(!progress){
-                            progress=prg;
-                        }
-                    }
-                    else{
-                        if(!progress || progress<prg || progress==1) progress=prg;
-                    }
-
+                *  すべての本のページ数を足した進捗率を表示
+                */
+               const totalBookInfo: {currentPage: number, totalPage: number} = {currentPage: 0, totalPage: 0};
+               for(const info of Object.values(this.readData[id])){
+                   totalBookInfo.currentPage+=info.currentPage;
+                   totalBookInfo.totalPage+=info.totalPage;
                 }
-                console.log(progress);
+                const progress = (totalBookInfo.currentPage-1)/(totalBookInfo.totalPage-1);
                 
                 const html = `
                     <span class="${iconClass} ${progress==1?readCssClasses.finish:readCssClasses.reading}">
-                        ${Math.floor(progress*100)}%
+                        ${progress==1?"読了":Math.floor(progress*100)+"%"}
                     </span>
                 `
 
                 item.querySelector("[class^='_icons']")?.insertAdjacentHTML("afterbegin", html);
-                console.log(`id: ${id}`);
             }
             item.classList.add("Addon_modified");
         }
