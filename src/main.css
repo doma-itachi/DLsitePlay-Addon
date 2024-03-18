@@ -117,3 +117,30 @@
 .addon_read_finish{
     background-color: #ff6916;
 }
+
+.PlayAddon_Settings{
+    padding-bottom: 15px;
+    & h2{
+        margin-bottom: 7px;
+        padding: 0 12px;
+        color: #666;
+        font-size: 1.4rem;
+    }
+
+    & ol{
+        background: #fff;
+    }
+
+    & li:first-child{
+        border-top: 1px solid #d5d5d5;
+    }
+    & li{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        padding: 0 12px;
+        border-bottom: 1px solid #d5d5d5;
+        font-size: 1.6rem;
+    }
+}
