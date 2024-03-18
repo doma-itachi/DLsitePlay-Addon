@@ -262,6 +262,43 @@ class ViewPage extends Page{
         document.querySelector("[class^='_bottomButtons']")!==null){
             this.insertButton();
         }
+
+        if(
+            !document.querySelector(".PlayAddon_Settings") &&
+            document.querySelector("[class^='_settingsMenu']")){
+            this.insertToInViewSettings();
+        }
+    }
+
+    private insertToInViewSettings(){
+        const html = `
+            <section class="PlayAddon_Settings">
+                <h2>アドオン</h2>
+                <ol>
+                    <li class="PlayAddon_Setting_Delete">
+                        <p class="Addon_Settings_delete">このファイルの読書進捗を削除</p>
+                    </li>
+                </ol>
+            </section>
+        `
+
+        document.querySelector("[class^='_settingsMenu']").insertAdjacentHTML("beforeend", html);
+        
+        document.querySelector(".PlayAddon_Setting_Delete").addEventListener("click", ()=>this.deleteHistory());
+    }
+
+    private async deleteHistory(){
+        if(!window.confirm("本当にこのアイテムの読書進捗を削除しますか？"))return;
+        const data = await chrome.storage.local.get(this.workID);
+        delete data[this.workID][this.fileName];
+        if(Object.keys(data[this.workID]).length==0){
+            await chrome.storage.local.remove(this.workID);
+        }
+        else{
+            await chrome.storage.local.set(data);
+        }
+        window.alert("このアイテムの読書進捗を削除しました");
+        console.log("正常に削除されました");
     }
 
     private insertButton(){
