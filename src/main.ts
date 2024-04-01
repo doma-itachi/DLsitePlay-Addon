@@ -391,20 +391,21 @@ class SettingsPage extends Page{
 
         document.querySelector("[class^='_settings']:last-child").insertAdjacentHTML("afterend", context);
         //イベント登録
-        document.querySelector(".Addon_Settings_save").addEventListener("click", SettingsPage.saveBackup);
-        document.querySelector(".Addon_Settings_load").addEventListener("click", SettingsPage.loadBackup);
-        document.querySelector(".Addon_Settings_delete").addEventListener("click", SettingsPage.clearStorage);
+        document.querySelector(".Addon_Settings_save").addEventListener("click",   ()=>this.saveBackup());
+        document.querySelector(".Addon_Settings_load").addEventListener("click",   ()=>this.loadBackup());
+        document.querySelector(".Addon_Settings_delete").addEventListener("click", ()=>this.clearStorage());
 
         //非同期情報を読み込み
-        const putInfo = async()=>{
-            const bytes = await chrome.storage.local.getBytesInUse(null);
-            const storage: { [key: string]: any } = await chrome.storage.local.get();
-            document.querySelector(".Addon_Credit_info").textContent = `保存データ数 ${Object.keys(storage).length} / 使用バイト数 ${bytes}bytes`
-        }
-        putInfo();
+        this.updateInfo();
     }
 
-    private static async saveBackup(){
+    private async updateInfo(){
+        const bytes = await chrome.storage.local.getBytesInUse(null);
+        const storage: { [key: string]: any } = await chrome.storage.local.get();
+        document.querySelector(".Addon_Credit_info").textContent = `保存データ数 ${Object.keys(storage).length} / 使用バイト数 ${bytes}bytes`;
+    }
+
+    private async saveBackup(){
         logF("バックアップファイルが保存されます");
         let data=await chrome.storage.local.get(null);
         const json: string=JSON.stringify(data);
@@ -417,7 +418,7 @@ class SettingsPage extends Page{
         document.body.removeChild(dummyElement);
     }
 
-    private static loadBackup(){
+    private loadBackup(){
         let input: HTMLInputElement=document.createElement("input");
         input.style.display="none";
         input.type="file";
@@ -428,17 +429,20 @@ class SettingsPage extends Page{
             reader.onload=e=>{
                 chrome.storage.local.clear();
                 chrome.storage.local.set(JSON.parse(e.target.result as string));
+                this.updateInfo();
                 input.style.display="block";
                 input.remove();
             }
             reader.readAsText(input.files[0]);
         });
+
         logF("バックアップファイルから復元しました");
     }
 
-    private static clearStorage(){
+    private clearStorage(){
         if(window.confirm("本当にアドオンのデータを初期化しますか？（読書進捗がリセットされます）")){
             chrome.storage.local.clear();
+            this.updateInfo();
         }
     }
 }
