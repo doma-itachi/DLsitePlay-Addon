@@ -195,10 +195,10 @@ class TreePage extends Page{
         for(let file of files){
             if(file.classList.contains("Addon_modified"))continue;
             file.classList.add("Addon_modified");
-            let DOM_info=file.querySelector("[class^='_info']");
+            let DOM_info=file.querySelector("[class*='_labelXsmall']");
             if(DOM_info.textContent.indexOf("-")==-1)continue;//フォルダだったらcontinueする
 
-            let filename=`${this.directory||""}/${file.querySelector("[class^='_filename']").textContent}`;
+            let filename=`${this.directory||""}/${file.querySelector("[class*='_titleMedium']").textContent}`;
 
             let data=undefined;
             if(datas[this.workID])data=datas[this.workID][filename];//進捗が保存されていたら要素を挿入
