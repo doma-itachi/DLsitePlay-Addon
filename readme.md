@@ -28,5 +28,5 @@ PC / Android上で動作する、DLsitePlayに新しい機能を追加する拡�
 ``` python pack.py src ```を実行してください
 
 ## ライセンス
-Copyright (c) 2022 土間いたち  
+Copyright (c) 2022 itachi_doma  
 このプロジェクトはMITライセンスの下で公開されています
