@@ -25,7 +25,11 @@ PC / Android上で動作する、DLsitePlayに新しい機能を追加する拡�
 - データのバックアップ＆復元
 
 ## パッケージ化
-``` python pack.py src ```を実行してください
+以下のコマンドでパッケージ化できます
+```bash
+npm i
+npm run build
+```
 
 ## ライセンス
 Copyright (c) 2022 itachi_doma  
