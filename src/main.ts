@@ -114,8 +114,8 @@ class LibraryPage extends Page{
     
     private insertDOM(){
         if(!this.readData) return;
-        const containers = document.querySelectorAll("[class^='_workList'] [data-test-id='virtuoso-item-list']>div");
-    
+        const containers = document.querySelectorAll("[class^='_workList'] [class^=_link]");
+        
         for(const item of containers){
             if(item.classList.contains("Addon_modified"))continue;
             
