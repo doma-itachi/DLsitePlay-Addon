@@ -1,5 +1,5 @@
-function logF(message: String){
-    console.log("[DLsitePlay Addon] "+message);
+function logF(message: any){
+    console.log("[DLsitePlay Addon]", message);
 }
 
 enum PageType{
@@ -105,7 +105,7 @@ class LibraryPage extends Page{
 
     private async load(){
         this.readData = await chrome.storage.local.get();
-        console.log(this.readData)
+        logF(this.readData)
     }
 
     public async domChanged() {
@@ -131,7 +131,7 @@ class LibraryPage extends Page{
                     continue;
                 }
             }
-            const id = styleAttr.match(/[^a-z]\/(?<id>[A-Z]{2}.+)_img/).groups.id;
+            const id = styleAttr.match(/[^a-z]\/(?<id>[A-Z]{2}.+)_img/)?.groups.id;
             if(!id){
                 continue;
             }
@@ -204,7 +204,7 @@ class TreePage extends Page{
             if(datas[this.workID])data=datas[this.workID][filename];//進捗が保存されていたら要素を挿入
 
             if(data){
-                console.log(data);
+                logF(data);
                 let state_text=data.currentPage==data.totalPage?"読了":"読書中";
                 let state_percent=Math.floor(((data.currentPage-1)/(data.totalPage-1))*100);
 
@@ -249,10 +249,9 @@ class ViewPage extends Page{
         
         let datas=await chrome.storage.local.get(this.workID);
         let data=null;
-        console.log(datas);
+        logF(datas);
         if(datas[this.workID])data=datas[this.workID][this.fileName];
         if(data){
-            console.log(data);
             if(data.totalPage!==data.currentPage)continuePage(data.currentPage);
         }
     }
@@ -298,7 +297,7 @@ class ViewPage extends Page{
             await chrome.storage.local.set(data);
         }
         window.alert("このアイテムの読書進捗を削除しました");
-        console.log("正常に削除されました");
+        logF("正常に削除されました");
     }
 
     private insertButton(){
@@ -323,7 +322,7 @@ class ViewPage extends Page{
             {duration: 500, easing: "ease-out"}
         );
 
-        console.log(`${this.workID}, ${this.fileName}`);
+        logF(`${this.workID}, ${this.fileName}`);
         ExtStorage.registInfo(this.workID, this.fileName, {totalPage: ViewPage.getTotalPage(), currentPage: ViewPage.getCurrentPage()});
     }
 
