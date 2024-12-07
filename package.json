@@ -1,0 +1,16 @@
+{
+    "scripts": {
+        "dev": "tsx ./build/dev.ts",
+        "build": "tsx ./build/build.ts"
+    },
+    "devDependencies": {
+        "@types/archiver": "^6.0.3",
+        "@types/chrome": "^0.0.287",
+        "@types/fs-extra": "^11.0.4",
+        "@types/node": "^22.10.1",
+        "archiver": "^7.0.1",
+        "esbuild": "^0.24.0",
+        "fs-extra": "^11.2.0",
+        "tsx": "^4.19.2"
+    }
+}
