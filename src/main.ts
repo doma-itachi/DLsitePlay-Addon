@@ -141,7 +141,8 @@ class LibraryPage extends Page{
                 reading: "addon_read_reading",
                 finish: "addon_read_finish"
             }
-            const iconClass = item.querySelector("[class^='_icons']>[class^='_icon']").classList[0];
+            //マンガ・CGなどのチップ
+            const iconClass = item.querySelector("[class^='_icons']>span").classList;
             if(id in this.readData){
                 /*
                 *  すべての本のページ数を足した進捗率を表示

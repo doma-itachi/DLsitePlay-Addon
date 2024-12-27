@@ -112,10 +112,10 @@
 }
 
 .addon_read_reading{
-    background-color: #545cff;
+    background-color: #545cff !important;
 }
 .addon_read_finish{
-    background-color: #ff6916;
+    background-color: #ff6916 !important;
 }
 
 .PlayAddon_Settings{
