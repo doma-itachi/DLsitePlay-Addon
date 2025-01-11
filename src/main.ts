@@ -41,9 +41,7 @@ class State{
     private static getPageType(url: string){
         url=decodeURI(url);
 
-        // /で区切られたURLから#以降を切り取る
-        let path: string[]=url.split("/");
-        path=path.slice(path.indexOf("#")+1);
+        const path: string[] = url.split("/").slice(3);
 
         // 作品画面
         // work/作品ID/tree/ディレクトリパス
